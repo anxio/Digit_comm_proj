@@ -1,0 +1,105 @@
+\documentclass[a4paper]{article}
+
+\usepackage{graphicx}          % For including graphics.
+\usepackage{amsmath}           % Some mathematical symbols.
+
+\addtolength{\topmargin}{-20mm}% Margin adjustments.
+\addtolength{\textheight}{20mm}% Margin adjustments.
+
+\begin{document}
+
+\title{Project 1 in  Image and Video Processing}
+\author{Baptiste Cavarec \and Adrien Anxionnat}
+% \date{November 15, 2015} % Manual date
+
+\maketitle
+
+\section*{Summary}
+\label{sec:summary}
+
+The aim of this project is to apply spatial and frequency techniques to filter images represented as grayscale images. In a first part we focus on using spatial techniques to filter images altered by different noises. In the second part we implement to algorithm in order to filter/enhance images altered by blur that can be interpreted as a badly focused picture for instance.
+
+\section{Introduction}
+\label{sec:introduction}
+This projects consists implementing different kind of filters to enhance images that have been altered in some way. In order to be able to compare the different method used through this project and to visualize the alteration, we would use the same image all along this report. This image is the well known detail of the 'Lena' picture (Fig~\ref{fig:lena} original picture can be found at \ref{lenapicture}.
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.3\columnwidth]{lena512.png}
+  \caption{512x512 Detail of the Lena Söderberg picture taken in 1972 by Dwight Hooker}
+  \label{fig:lena}
+\end{figure}
+
+\subsection{Introduction to spatial techniques}
+
+In this first part we focus on applying spatial techniques to filter our picture. This means that we directly apply our filters on the picture. 
+
+\subsubsection{Enhancing contrast}
+
+In this subsection we will face a common issue for photographers that is the lack of contrast. It means that all the dynamic range of the picture is weak. It can be caused by a lack of exposition, bad settings or material problem. 
+In order to compare our solution to the original picture, one should transform this picture in order to have a low contrasted one. In order to do so we are given the following filter:
+
+\begin{equation}
+g(x,y)= a f(x,y) + b
+\end{equation}
+
+With a=0.2 and b=50, we then quantize g in order to obtain the low contrasted picture in Fig.\ref{fig:lenalow}
+
+\ref{lenapicture}.
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.3\columnwidth]{lenalow.png}
+  \caption{Lena picture filtered in order to have a low contrast}
+  \label{fig:lenalow}
+\end{figure}
+
+
+\subsubsection{Noised image }
+Another common issue that has to be tackled is the presence of an additive noise in the image. This noise is generally modeled as a gaussian noice and we will see some methods to remove it. 
+
+\subsection{Frequency domain filtering}
+
+
+
+\section{System Description}
+\label{sec:system}
+Give a description of the system that is implemented for finding a solution to
+the problem stated in~Section \ref{sec:introduction}. Any derivations that are
+useful for understanding the solution are presented here. Describe and motivate
+implemented algorithms.
+
+\section{Results}
+\label{sec:results}
+
+\section{Conclusions}
+\label{sec:conclusions}
+
+
+
+\section*{Appendix}
+
+\subsection*{Who Did What}
+
+
+\subsection*{MatLab code}
+Include the well documented MatLab code that you have used.
+\begin{verbatim}
+function h = histogram(f)
+% A function that calculates the histogram of matrix f.
+
+N = numel(f); % The number of elements in f
+h = ...
+\end{verbatim}
+
+
+\begin{thebibliography}{99}
+\bibitem{coursebook} Rafael C. Gonzalez and Richard E. Woods,
+  \textsl{Digital Image Processing},
+  Prentice Hall, 2nd ed., 2002
+\bibitem{latexmanual} Tobias Oetiker et al.,
+  \textsl{The Not So Short Introduction to \LaTeXe},
+  Available: http://tobi.oetiker.ch/lshort/lshort.pdf,
+  Last accessed: March 17, 2009
+\bibitem{lenapicture} $http://www.ee.cityu.edu.hk/~lmpo/lenna/len_full.jpg$
+
+\end{thebibliography}
+\end{document}
