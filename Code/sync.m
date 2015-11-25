@@ -50,7 +50,7 @@ corr = abs(mf_matrix * c.');
 t_samp=t(i_samp);
 
 %Displaying of the cross-correlation 
-figure
+figure(1)
     hold all;
     plot(t,corr,'b'); 
     xlabel('Time shift');
