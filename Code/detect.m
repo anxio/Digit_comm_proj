@@ -31,8 +31,8 @@ r_phase_0((abs(r_phase_0)>pi/2))=1;
 
 %Computing of the second bit of each symbol
 r_phase_1=r_phase;
-r_phase_1((abs(r_phase_1)>=0))=0;
-r_phase_1((abs(r_phase_1)<0))=1;
+r_phase_1((r_phase_1>=0))=0;
+r_phase_1((r_phase_1<0))=1;
 
 %Merging of the first and second bit for each symbol
 inter=[r_phase_0 ; r_phase_1];

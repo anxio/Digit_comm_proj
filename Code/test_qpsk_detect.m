@@ -2,5 +2,7 @@
 
 nr_data_bits=10;
 b = random_data(nr_data_bits);
-k=qpsk(b);
-bhat=detect(k);
+
+r=qpsk(b);
+b=double(b);
+bhat=detect(r);
