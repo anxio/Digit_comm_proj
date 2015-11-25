@@ -40,7 +40,8 @@ for snr_point = 1:length(EbN0_db)
     %%%
 
     % Generate training sequence.
-    b_train = training_sequence(nr_training_bits);
+    %b_train = training_sequence(nr_training_bits);
+    b_train=zeros(1,nr_training_bits)
     
     % Generate random source data {0, 1}.
     b_data = random_data(nr_data_bits);
@@ -68,7 +69,7 @@ for snr_point = 1:length(EbN0_db)
     n = sqrt(sigma_sqr/2)*(randn(size(tx))+j*randn(size(tx)));
 
     % Test without noise
-    n=zeros(size(tx));
+    %n=zeros(size(tx));
 
     % Received signal
     rx = tx + n;

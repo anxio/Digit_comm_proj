@@ -50,11 +50,11 @@ corr = abs(mf_matrix * c.');
 t_samp=t(i_samp);
 
 %Displaying of the cross-correlation 
-% figure
-%     hold all;
-%     plot(t,corr,'b'); 
-%     xlabel('Time shift');
-%     ylabel('Norm of the correlation function');
+figure
+    hold all;
+    plot(t,corr,'b'); 
+    xlabel('Time shift');
+    ylabel('Norm of the correlation function');
 end
 
 
