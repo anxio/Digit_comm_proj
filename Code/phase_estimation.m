@@ -26,7 +26,7 @@ c= qpsk(b_train);
 
 k= 1:L;
 
-phihat= sum(angle(r(Q.*k).*conj(c)))./L;
+phihat= sum(angle(r(k).*conj(c)))./L;
 
 
 
