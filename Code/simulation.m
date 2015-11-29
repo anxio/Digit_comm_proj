@@ -8,7 +8,7 @@
 % Initialization
 EbN0_db = 0:10;                     % Eb/N0 values to simulate (in dB)
 nr_bits_per_symbol = 2;             % Corresponds to k in the report
-nr_guard_bits = 50;                 % Size of guard sequence (in nr bits)
+nr_guard_bits = 10;                 % Size of guard sequence (in nr bits)
                                     % Guard bits are appended to transmitted bits so
                                     % that the transients in the beginning and end
                                     % of received sequence do not affect the samples
@@ -21,8 +21,8 @@ Q = 8;                              % Number of samples per symbol in baseband
 % Define the pulse-shape used in the transmitter. 
 % Pick one of the pulse shapes below or experiemnt
 % with a pulse of your own.
-%pulse_shape = ones(1, Q);
-pulse_shape = root_raised_cosine(Q);
+pulse_shape = ones(1, Q);
+%pulse_shape = root_raised_cosine(Q);
 
 % Matched filter impulse response. 
 mf_pulse_shape = fliplr(pulse_shape);
@@ -66,7 +66,7 @@ for snr_point = 1:length(EbN0_db)
 
     % Create noise vector.
     n = sqrt(sigma_sqr/2)*(randn(size(tx))+j*randn(size(tx)));
-    n=zeros(size(tx));    
+    %n=zeros(size(tx));    
 
     % Received signal
     rx = tx + n;
@@ -82,8 +82,8 @@ for snr_point = 1:length(EbN0_db)
     % is here set arbitrarily. Note that you might need to change these
     % parameters. Use sensible values (hint: plot the correlation
     % function used for syncing)! 
-    t_start=1;
-    t_end=t_start+Q*nr_guard_bits/2;
+    t_start=1+Q*nr_guard_bits/2;
+    t_end=t_start+100;
     t_samp = sync(mf, b_train, Q, t_start, t_end);
     
     % Down sampling. t_samp is the first sample, the remaining samples are all

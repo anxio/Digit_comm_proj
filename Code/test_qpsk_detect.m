@@ -6,3 +6,4 @@ b = random_data(nr_data_bits);
 r=qpsk(b);
 b=double(b);
 bhat=detect(r);
+n=norm(bhat-b);
