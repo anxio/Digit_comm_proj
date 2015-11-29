@@ -49,14 +49,14 @@ corr = abs((c* mf_matrix'));
 t_samp=t(i_samp);
 
 %Displaying of the cross-correlation 
-figure(1)
-    hold all;
-    plot(t,corr,'b'); 
-    xlabel('Time shift');
-    ylabel('Norm of the correlation function');
-    c_corr=repmat(c,Q,1);
-    c_corr=reshape(c_corr,1,Q*size(c_corr,2));
-    hold off;
+% figure(1)
+%     hold all;
+%     plot(t,corr,'b'); 
+%     xlabel('Time shift');
+%     ylabel('Norm of the correlation function');
+%     c_corr=repmat(c,Q,1);
+%     c_corr=reshape(c_corr,1,Q*size(c_corr,2));
+%     hold off;
 
 % figure(2)
 %     hold all
