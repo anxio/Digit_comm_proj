@@ -14,7 +14,7 @@ nr_guard_bits = 10;                 % Size of guard sequence (in nr bits)
                                     % of received sequence do not affect the samples
                                     % which contain the training and data symbols.
 nr_data_bits = 1000;                % Size of each data sequence (in nr bits)
-nr_training_bits =50;             % Size of training sequence (in nr bits)
+nr_training_bits = 50;             % Size of training sequence (in nr bits)
 nr_blocks = 200;                     % The number of blocks to simulate
 
 Q = 8;                              % Number of samples per symbol in baseband
@@ -32,7 +32,6 @@ mf_pulse_shape = fliplr(pulse_shape);
 % Loop over different values of Eb/No.
 nr_errors = zeros(1, length(EbN0_db));   % Error counter 
 nr_errors_corr = zeros(1, length(EbN0_db));
-nr_errors_without_sync=zeros(1, length(EbN0_db));
 for snr_point = 1:length(EbN0_db)
   
   % Loop over several blocks to get sufficient statistics.
@@ -92,20 +91,15 @@ for snr_point = 1:length(EbN0_db)
     % Down sampling. t_samp is the first sample, the remaining samples are all
     % separated by a factor of Q. Only training+data samples are kept.
     r = mf(t_samp:Q:t_samp+Q*(nr_training_bits+nr_data_bits)/2-1);
-    
-    r_without_sync = mf(1+Q*nr_guard_bits/2:Q:1+Q*nr_guard_bits/2+Q*(nr_training_bits+nr_data_bits)/2-1);
+
     % Phase estimation and correction.
     phihat = phase_estimation(r, b_train);
     r_corr = r * exp(-j*phihat);
-    phihat_without_sync = phase_estimation( r_without_sync, b_train);
-    
-    r_without_sync = r_without_sync * exp(-j*phihat_without_sync);
+        
     % Make decisions. Note that dhat will include training sequence bits
     % as well.
     bhat_corr = detect(r_corr);
     bhat=detect(r);
-    bhat_without_sync=detect(r_without_sync);
-    
     
     % Count errors. Note that only the data bits and not the training bits
     % are included in the comparison. The last data bits are missing as well
@@ -116,10 +110,6 @@ for snr_point = 1:length(EbN0_db)
 
     temp_corr=bhat_corr(1+nr_training_bits:nr_training_bits+nr_data_bits) ~= b_data;
     nr_errors_corr(snr_point) = nr_errors_corr(snr_point) + sum(temp_corr);
-    
-    temp_without_sync=bhat_without_sync(1+nr_training_bits:nr_training_bits+nr_data_bits) ~= b_data;
-    nr_errors_without_sync(snr_point) = nr_errors_without_sync(snr_point) + sum(temp_without_sync);
-    
     
     % Next block.
     
