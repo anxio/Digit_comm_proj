@@ -30,6 +30,7 @@ function d = qpsk(b)
 
 temp=zeros(1,length(b)/2); %2 bits represent 1 symbol
 %Definition of the QPSK symbols using Gray Coding
+
 for n=1:length(b)/2
     p=b(2*n);%Pair bits
     imp=b(2*n - 1);%Impair bits
